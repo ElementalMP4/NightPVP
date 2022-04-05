@@ -11,8 +11,7 @@ public class AttackListener implements Listener {
 	
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
- 
-        if (!(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Player)) return;
+        if (!isPlayerVersusPlayer(event)) return;
         Player damager = (Player) event.getDamager();
  
         if (isDaytime()) {
@@ -20,8 +19,12 @@ public class AttackListener implements Listener {
             damager.sendMessage(ChatColor.RED + "PVP is only available during night time");
         }
     }
+    
+    private boolean isPlayerVersusPlayer(EntityDamageByEntityEvent event)  {
+    	return event.getEntity() instanceof Player && event.getDamager() instanceof Player;
+    }
  
-    public boolean isDaytime() {
+    private boolean isDaytime() {
         Server server = NightPVP.server;
         long time = server.getWorld("world").getTime();
  

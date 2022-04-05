@@ -1,0 +1,4 @@
+name: NightPVP
+version: 1.0.0
+main: main.nightpvp.NightPVP
+api-version: 1.18
